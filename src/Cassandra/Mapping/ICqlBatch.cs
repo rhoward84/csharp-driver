@@ -13,6 +13,11 @@ namespace Cassandra.Mapping
         IEnumerable<Cql> Statements { get; }
 
         /// <summary>
+        /// The type of batch to use.
+        /// </summary>
+        BatchType BatchType { get; }
+
+        /// <summary>
         /// Allows you to convert an argument/bind variable value being used in a CQL statement using the same converters that are being used by the client
         /// internally, including any user-defined conversions if you configured them.  Will convert a value of Type <typeparamref name="TValue"/> to a value of
         /// Type <typeparamref name="TDatabase"/> or throw an InvalidOperationException if no converter is available.
@@ -27,5 +32,10 @@ namespace Cassandra.Mapping
         /// Inserts the specified POCO in Cassandra if not exists.
         /// </summary>
         void InsertIfNotExists<T>(T poco, CqlQueryOptions queryOptions = null);
+
+        /// <summary>
+        /// Inserts the specified POCO in Cassandra if not exists.
+        /// </summary>
+        void InsertIfNotExists<T>(T poco, bool insertNulls, int? ttl, CqlQueryOptions queryOptions = null);
     }
 }
